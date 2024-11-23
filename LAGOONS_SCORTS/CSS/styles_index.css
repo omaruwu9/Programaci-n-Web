@@ -1,0 +1,60 @@
+/* General */
+body {
+    background-color: black; /* Fondo negro */
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: justify;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #ae2029; /* Rojo del navbar */
+}
+
+.navbar .nav-link {
+    color: white;
+    margin: 0 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.navbar .nav-link:hover {
+    background-color: #c72e29; /* Rojo oscuro cuando pasa el mouse */
+}
+
+/* Main Content */
+.container {
+    max-width: 1200px;
+}
+
+form .form-control {
+    background-color: #333;
+    color: white;
+    border: none;
+}
+
+form .form-control:focus {
+    box-shadow: none;
+    border-color: #555;
+}
+
+.btn-primary {
+    background-color: #0056b3;
+    border: none;
+}
+
+.btn-secundary {
+    background-color: #0056b3;
+    border: none;
+}
+
+.social-icons {
+    margin-top: 20px;
+}
+
+.social-icon {
+    width: 40px;
+    margin: 0 10px;
+}
+
+

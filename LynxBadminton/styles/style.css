@@ -1,0 +1,116 @@
+*{
+    margin: 0;
+}
+ul{
+    list-style: none;
+}
+.anchor-default, .anchor-default:link, .anchor-default:visited{
+	text-decoration: inherit;
+	cursor: pointer;
+}
+
+:root{
+    --white: snow;
+    --blue: #2041ae;
+    --dark-blue: #586d99;
+    --light-blue: #C4D7FF; 
+    --peach: #FFD7C4;
+    --yellow: #FFF4B5;
+}
+
+.color-snow{
+    color: var(--white) !important;
+}
+.color-blue{
+    color: var(--blue);
+}
+.color-dark-blue{
+    color: var(--dark-blue);
+}
+.bg-blue{
+    background: var(--blue);
+}
+.bg-light-blue{
+    background: var(--light-blue);
+}
+.svg-white {
+    fill: white;
+}
+
+/*---------------------------------------------------------------------------------------------------------------------------*/
+body {
+    background-color: white; /* Fondo blanco */
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Navbar */
+.navbar {
+    background-color: #20ae62; /* Verde del navbar */
+}
+
+
+.navbar .nav-link {
+    color: white;
+    margin: 0 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.navbar .nav-link:hover {
+    background-color: ##35ae20; /* Otro Verde cuando pasa el mouse */
+}
+
+.p{
+    color: black;
+}
+
+/*ABOUT WE*/
+/* Estilo general del contenedor */
+.container {
+    background-color: #f9f9f9; /* Color de fondo suave */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para resaltar el contenedor */
+}
+
+/* Títulos */
+.container h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.5rem;
+    color: #007bff; /* Azul principal */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Estilo para los párrafos */
+.container p {
+    font-family: 'Roboto', sans-serif; /* Tipografía moderna y legible */
+    font-size: 1.1rem; /* Tamaño de fuente ligeramente mayor */
+    color: #333; /* Gris oscuro para buena legibilidad */
+    line-height: 1.8; /* Espaciado entre líneas */
+    margin-bottom: 15px; /* Espacio entre párrafos */
+    text-align: justify; /* Justificar el texto */
+}
+
+/* Enlaces dentro del contenedor */
+.container a {
+    color: white; /* Azul consistente con el tema */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.container a:hover {
+    color: #0056b3; /* Oscurecer el azul al pasar el cursor */
+    text-decoration: underline;
+}
+
+/* Imágenes */
+.container img {
+    border-radius: 5px;
+    margin-top: 10px;
+}

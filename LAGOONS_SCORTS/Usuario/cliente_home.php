@@ -1,23 +1,50 @@
-<?php
-    include 'head.php';
-    include '../BaseDatos/db.php';
-    // Suponiendo que tienes una conexión a la base de datos abierta
-    $userId = $_SESSION['id_usuario']; // Supón que el usuario está autenticado y su ID está almacenado en la sesión
+<?php 
+include 'head.php';
+include '../BaseDatos/db.php';
+session_start();
+
+// Verifica si el usuario está autenticado (por correo, por ejemplo)
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php"); // Redirige al login si no hay sesión activa
+    exit();
+}
+
+$email = $_SESSION['email']; // Suponemos que el email del usuario está almacenado en la sesión.
+
+try {
+    // Consulta para obtener el id_scort basado en el email
+    $queryIdScort = "SELECT id_usuario FROM usuario WHERE email = ?";
+    $stmtIdScort = $conn->prepare($queryIdScort);
+    $stmtIdScort->bind_param("s", $email);
+    $stmtIdScort->execute();
+    $resultIdScort = $stmtIdScort->get_result();
+    $scortData = $resultIdScort->fetch_assoc();
+
+    if (!$scortData) {
+        echo "Error: Usuario no encontrado.";
+        exit();
+    }
+
+    // Guarda el id_scort en la variable
+    $userId = $scortData['id_usuario'];
 
     // Consulta para obtener los datos del perfil del usuario
-    $queryProfile = "SELECT alias, imagen FROM scort WHERE id_scort = ?";
+    $queryProfile = "SELECT nombre, imagen FROM usuario WHERE id_usuario = ?";
     $stmtProfile = $conn->prepare($queryProfile);
     $stmtProfile->bind_param("i", $userId);
     $stmtProfile->execute();
     $resultProfile = $stmtProfile->get_result();
     $user = $resultProfile->fetch_assoc();
 
-    // Consulta para obtener el historial de citas del usuario
-    $queryHistorial = "SELECT fecha, testimonio1 FROM cita WHERE id_cliente = ? ORDER BY fecha DESC";
-    $stmtHistorial = $conn->prepare($queryHistorial);
-    $stmtHistorial->bind_param("i", $userId);
-    $stmtHistorial->execute();
-    $resultHistorial = $stmtHistorial->get_result();
+    // Manejo de casos donde no se encuentra el perfil
+    if (!$user) {
+        echo "Error: Datos de perfil no encontrados.";
+        exit();
+    }
+} catch (Exception $e) {
+    echo "Error en la consulta: " . $e->getMessage();
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -27,44 +54,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lagons VIP</title>
     <link rel="stylesheet" href="../CSS/styles_index.css">
+    <style>
+        body {
+            background-color: #333; /* Fondo oscuro para resaltar el texto blanco */
+            color: white; /* Color de texto blanco */
+            font-family: Arial, sans-serif;
+        }
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Altura total de la ventana */
+        }
+        .profile-image {
+            border-radius: 50%;
+            margin-bottom: 20px;
+            width: 300px;
+            height: 300px;
+            object-fit: cover; /* Para asegurar que la imagen se vea bien */
+            border: 5px solid white; /* Borde blanco */
+        }
+        .profile-welcome {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .profile-name {
+            font-size: 2rem;
+            font-weight: normal;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <!-- Main Content -->
-    <div class="container my-5">
-        <div class="row">
-            <!-- Left Column (Profile Picture and User Name) -->
-            <div class="col-md-4 text-center">
-                <?php if($user['foto_perfil']): ?>
-                    <img src="../IMAGENES/<?php echo $user['foto_perfil']; ?>" alt="Foto de perfil" class="img-fluid rounded-circle mb-4" style="max-width: 150px;">
-                <?php else: ?>
-                    <img src="../IMAGENES/default-profile.JPEG" alt="Foto de perfil" class="img-fluid rounded-circle mb-4" style="max-width: 150px;">
-                <?php endif; ?>
-                <h3><?php echo htmlspecialchars($user['nombre']); ?></h3>
-            </div>
-
-            <!-- Middle Column (Buttons) -->
-            <div class="col-md-4 text-center">
-                <button onclick="window.location.href='editar_perfil.php'" class="btn btn-primary mb-3 w-100">Edición del perfil</button>
-                <button onclick="window.location.href='metodo_pago.php'" class="btn btn-secondary w-100">Método de pago</button>
-            </div>
-
-            <!-- Right Column (Historial de Citas) -->
-            <div class="col-md-4">
-                <h4>Historial de Citas</h4>
-                <ul class="list-group">
-                    <?php while($cita = $resultHistorial->fetch_assoc()): ?>
-                        <li class="list-group-item">
-                            <strong><?php echo date("d-m-Y", strtotime($cita['fecha'])); ?></strong>: <?php echo htmlspecialchars($cita['descripcion']); ?>
-                        </li>
-                    <?php endwhile; ?>
-                </ul>
-            </div>
-        </div>
+    <div class="profile-container">
+        <img src="<?php 
+            echo isset($user['imagen']) && !empty($user['imagen']) 
+                ? '../IMAGENES/' . htmlspecialchars($user['imagen']) 
+                : '../IMAGENES/default-profile.jpg';
+        ?>" 
+        alt="Foto de perfil" 
+        class="profile-image">
+        
+        <h1 class="profile-welcome">Bienvenido</h1>
+        
+        <h2 class="profile-name">
+            <?php 
+                echo htmlspecialchars($user['nombre']);
+            ?>
+        </h2>
     </div>
 
     <!-- Footer -->
-    <?php 
-        include 'footer.php';
-    ?>
+    <?php include 'footer.php'; ?>
 </body>
 </html>

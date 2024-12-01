@@ -31,38 +31,48 @@ body {
  * 
  * 
  * */
-/*CALENDARIO STYLES*/
+/* Contenedor principal */
 .container {
-    display: flex; /* Contenedor principal para flexbox */
-    justify-content: space-between; /* Espacio entre los contenedores */
+    display: flex; /* Flexbox para organizar los elementos */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan si el espacio es insuficiente */
+    justify-content: space-between; /* Distribuye el espacio entre los elementos */
     padding: 20px;
 }
 
+/* Contenedor del calendario */
 .calendario-container {
-    width: 45%; /* Ajusta el tamaño del contenedor del calendario */
-    text-align: center; /* Centrar contenido del calendario */
+    width: 100%; /* Asegúrate de que el calendario ocupe el 100% del ancho disponible */
+    max-width: 900px; /* Limita el tamaño máximo del calendario */
+    margin-bottom: 40px; /* Espaciado debajo del calendario */
+    text-align: center; /* Centrar el contenido del calendario */
 }
 
+/* Contenedor de la información de la reservación */
 .reservacion-container {
-    width: 45%; /* Ajusta el tamaño del contenedor de la información */
+    width: 100%; /* Asegúrate de que la reservación ocupe todo el espacio disponible */
+    max-width: 1000px; /* Define un tamaño máximo para que no se expanda demasiado */
+    margin: 40px auto;
     padding: 20px;
-    border: 1px solid #171515; /* Añade un borde para el contenedor */
-    border-radius: 5px; /* Bordes redondeados */
+    border: 1px solid #171515;
+    border-radius: 5px;
+    text-align: justify;
+    box-sizing: border-box; /* Asegura que el padding no afecte al tamaño total del contenedor */
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+/* Estilo para el botón */
+button {
+    padding: 10px 20px;
+    background-color: #c72e29;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-th, td {
-    padding: 10px;
-    text-align: center;
+button:hover {
+    background-color: #c72e29;
 }
 
-th {
-    background-color: #f2f2f2;
-}
 
 /* Estilo para el encabezado del calendario */
 .mes-titulo {
@@ -79,7 +89,7 @@ th {
 
 /* Estilo para el botón */
 button {
-    background-color: blue; /* Color de fondo azul */
+    background-color: #ae2029; /* Color de fondo azul */
     color: white; /* Color del texto en blanco */
     border: none; /* Sin borde */
     padding: 10px 20px; /* Espaciado interno */
@@ -89,7 +99,7 @@ button {
 }
 
 button:hover {
-    background-color: darkblue; /* Color de fondo al pasar el ratón */
+    background-color: darkred; /* Color de fondo al pasar el ratón */
 }
 
 

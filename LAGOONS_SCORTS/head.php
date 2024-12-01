@@ -16,7 +16,7 @@
                     <a class="nav-link active" href="index.php">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Catálogo</a>
+                    <a class="nav-link" href="catalogo.php">Catálogo</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="calendario.php">Calendario</a>

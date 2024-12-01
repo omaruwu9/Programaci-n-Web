@@ -43,8 +43,14 @@ $diasEnMes = date('t', $primerDia);
 $diaDeLaSemana = date('w', $primerDia);
 
 // Crear el calendario
-$calendario = '<table border="1">';
-$calendario .= '<tr><th colspan="7" class="mes-titulo">' . $nombreMes . ' ' . $año . '</th></tr>';
+$calendario = '<div class="calendario-container">';
+$calendario .= '<div class="calendario-header">';
+$calendario .= '<button class="calendario-btn" onclick="navegarMes(-1)">&#10094;</button>';
+$calendario .= '<h2>' . $nombreMes . ' ' . $año . '</h2>';
+$calendario .= '<button class="calendario-btn" onclick="navegarMes(1)">&#10095;</button>';
+$calendario .= '</div>';
+
+$calendario .= '<table class="calendario">';
 $calendario .= '<tr>
                     <th class="dias-semana">Dom</th>
                     <th class="dias-semana">Lun</th>
@@ -78,4 +84,75 @@ while (($dia + $diaDeLaSemana) % 7 != 0) {
 }
 
 $calendario .= '</tr></table>';
+$calendario .= '</div>';
+
+echo $calendario;
 ?>
+
+<!-- Estilos CSS -->
+<style>
+    .calendario-container {
+        max-width: 500px;
+        margin: 0 auto;
+        text-align: center;
+        border: 2px solid #ccc;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+    }
+    .calendario-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        color: black; /* Color negro para el mes y año */
+    }
+    .calendario-btn {
+        background-color: #ae2029;
+        color: white;
+        font-size: 20px;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+    }
+    .calendario-btn:hover {
+        background-color: #ae2029;
+    }
+    .calendario {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .dias-semana {
+        padding: 10px;
+        background-color: #ae2029;
+        color: black; /* Color negro para los días de la semana */
+        font-weight: bold;
+    }
+    td {
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        color: black; /* Color negro para los números */
+    }
+    td:hover {
+        background-color: #f1f1f1;
+    }
+</style>
+
+<!-- Script JS -->
+<script>
+    function navegarMes(incremento) {
+        let mes = <?php echo $mes; ?> + incremento;
+        let año = <?php echo $año; ?>;
+        
+        if (mes > 12) {
+            mes = 1;
+            año++;
+        } else if (mes < 1) {
+            mes = 12;
+            año--;
+        }
+
+        window.location.href = '?mes=' + mes + '&año=' + año;
+    }
+</script>

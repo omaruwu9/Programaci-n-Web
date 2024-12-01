@@ -13,16 +13,16 @@
         <div class="container-fluid">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="index.php">Inicio</a>
+                    <a class="nav-link active" href="cliente_home.php">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Catálogo</a>
+                    <a class="nav-link" href="editar_perfil.php">Editar Perfil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="calendario.php">Calendario</a>
+                    <a class="nav-link" href="citas.php">Citas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="novedades.php">Novedades</a>
+                    <a class="nav-link" href="catalogo.php">Catalogo</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="faqs.php">Ayuda</a>
